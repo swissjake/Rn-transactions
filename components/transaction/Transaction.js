@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, StatusBar } from "react-native";
 import React from "react";
 import TransactionList from "./TransactionList";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const transactions = [
   {
@@ -32,16 +33,15 @@ const Transaction = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Transaction</Text>
-      <FlatList
-        data={transactions}
-        renderItem={({ item, index }) => (
-          <TransactionList {...item} index={index} />
-        )}
-      >
-        {/* {transactions.map((transaction, index) => (
-         
-        ))} */}
-      </FlatList>
+      <SafeAreaView>
+        <StatusBar barStyle={{ backgroundColor: "red" }} hidden={false} />
+        <FlatList
+          data={transactions}
+          renderItem={({ item, index }) => (
+            <TransactionList {...item} index={index} />
+          )}
+        ></FlatList>
+      </SafeAreaView>
     </View>
   );
 };
